@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Base from "../core/Base";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   getAllCategories,
   getProduct,
@@ -9,6 +9,7 @@ import {
 import { isAuthenticated } from "../auth/helper/index";
 
 const UpdateProduct = ({ match }) => {
+  let productId=useParams()
   const { user, token } = isAuthenticated();
 
   const [values, setValues] = useState({
@@ -74,7 +75,7 @@ const UpdateProduct = ({ match }) => {
   };
 
   useEffect(() => {
-    preload(match.params.productId);
+    preload(productId);
   }, []);
 
   //TODO: work on it
