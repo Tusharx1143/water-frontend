@@ -18,8 +18,6 @@ const UpdateProduct = ({ match }) => {
     price: "",
     stock: "",
     photo: "",
-    categories: [],
-    category: "",
     loading: false,
     error: "",
     createdProduct: "",
@@ -32,8 +30,6 @@ const UpdateProduct = ({ match }) => {
     description,
     price,
     stock,
-    categories,
-    category,
     loading,
     error,
     createdProduct,
@@ -53,7 +49,6 @@ const UpdateProduct = ({ match }) => {
           name: data.name,
           description: data.description,
           price: data.price,
-          category: data.category._id,
           stock: data.stock,
           formData: new FormData()
         });
@@ -61,19 +56,7 @@ const UpdateProduct = ({ match }) => {
     });
   };
 
-  const preloadCategories = () => {
-    getAllCategories().then(data => {
-      if (data.error) {
-        setValues({ ...values, error: data.error });
-      } else {
-        setValues({
-          categories: data,
-          formData: new FormData()
-        });
-      }
-    });
-  };
-
+ 
   useEffect(() => {
     preload(productId);
   }, []);
@@ -158,21 +141,6 @@ const UpdateProduct = ({ match }) => {
           placeholder="Price"
           value={price}
         />
-      </div>
-      <div className="form-group">
-        <select
-          onChange={handleChange("category")}
-          className="form-control"
-          placeholder="Category"
-        >
-          <option>Select</option>
-          {categories &&
-            categories.map((cate, index) => (
-              <option key={index} value={cate._id}>
-                {cate.name}
-              </option>
-            ))}
-        </select>
       </div>
       <div className="form-group">
         <input

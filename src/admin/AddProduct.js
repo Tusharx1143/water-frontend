@@ -135,19 +135,6 @@ const errorMessage = () => (
                     />
                   </div>
                   <div className="form-group">
-                    <select
-                      onChange={handleChange("category")}
-                      className="form-control"
-                      placeholder="Category"
-                    >
-                      <option>Select</option>
-                      {categories&& 
-                      categories.map((cate,index)=>(
-                        <option key={index} value={cate._id}>{cate.name}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="form-group">
                     <input
                       onChange={handleChange("stock")}
                       type="number"
