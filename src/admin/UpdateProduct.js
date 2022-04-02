@@ -18,6 +18,8 @@ const UpdateProduct = ({ match }) => {
     price: "",
     stock: "",
     photo: "",
+    categories: [],
+    category: "",
     loading: false,
     error: "",
     createdProduct: "",
@@ -56,7 +58,19 @@ const UpdateProduct = ({ match }) => {
     });
   };
 
- 
+  const preloadCategories = () => {
+    getAllCategories().then(data => {
+      if (data.error) {
+        setValues({ ...values, error: data.error });
+      } else {
+        setValues({
+          categories: data,
+          formData: new FormData()
+        });
+      }
+    });
+  };
+
   useEffect(() => {
     preload(productId);
   }, []);
