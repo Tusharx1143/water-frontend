@@ -73,7 +73,7 @@ const data= await fetch(`${API}/razorpay`,{
     "key": "rzp_test_ZmAZxSAt5kg5uR", 
     "amount": data.amount.toString(), // 2000 paise = INR 20
     "currency": data.currency,
-    "name": "Agro Mart",
+    "name": "Tushar water works",
     "description": "Test Transaction",
     "image": "http://localhost:8010/api/logo",
     "order_id": data.id, 
