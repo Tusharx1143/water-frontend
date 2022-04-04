@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect ,useRef} from "react";
 import { Link } from "react-router-dom";
 import { isAuthenticated } from "../auth/helper/index";
 import Base from "../core/Base";
@@ -7,7 +7,9 @@ import {createProduct, getAllCategories} from "./helper/adminapicall"
 
 
 export const AddProduct = () => {
+  const inputRef=useRef();
   const{user,token}=isAuthenticated();
+  const formData=new FormData();
         const [values, setValues] = useState({
                 name: "",
                 description: "",
@@ -17,7 +19,6 @@ export const AddProduct = () => {
                 error:"",
                 createdProduct:"",
                 getaRedirect:false,
-                formData:""
               })
 
               const { name, 
@@ -28,7 +29,6 @@ export const AddProduct = () => {
                 error,
                 createdProduct,
                 getaRedirect,
-                formData
                } = values;
 const onSubmit = (event) => {
                 event.preventDefault();
@@ -56,6 +56,7 @@ const onSubmit = (event) => {
     
 const handleChange = name => event => {
   const value=event.target.value;
+  formData.append(name,value)
   setValues({...values,[name]:value});
         //
 };
@@ -79,7 +80,8 @@ const errorMessage = () => (
                   <div className="form-group">
                     <label className="btn btn-block btn-success">
                       <input
-                        onChange={handleChange("photo")}
+                        onChange={() => setValues({...values,photo:inputRef.current.files[0].name})}
+                        ref={inputRef}
                         type="file"
                         name="photo"
                         accept="image"
