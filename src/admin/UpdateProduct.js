@@ -40,12 +40,12 @@ const UpdateProduct = ({ match }) => {
   } = values;
 
   const preload = productId => {
-    getProduct(productId).then(data => {
+    getProduct(productId.productId).then(data => {
       //console.log(data);
       if (data.error) {
         setValues({ ...values, error: data.error });
       } else {
-        preloadCategories();
+       
         setValues({
           ...values,
           name: data.name,
@@ -58,18 +58,6 @@ const UpdateProduct = ({ match }) => {
     });
   };
 
-  const preloadCategories = () => {
-    getAllCategories().then(data => {
-      if (data.error) {
-        setValues({ ...values, error: data.error });
-      } else {
-        setValues({
-          categories: data,
-          formData: new FormData()
-        });
-      }
-    });
-  };
 
   useEffect(() => {
     preload(productId);
@@ -80,7 +68,7 @@ const UpdateProduct = ({ match }) => {
     event.preventDefault();
     setValues({ ...values, error: "", loading: true });
 
-    updateProduct(match.params.productId, user._id, token, formData).then(
+    updateProduct(match.params.productId, user._id, token, JSON.stringify(values)).then(
       data => {
         if (data.error) {
           setValues({ ...values, error: data.error });
@@ -102,7 +90,6 @@ const UpdateProduct = ({ match }) => {
 
   const handleChange = name => event => {
     const value = name === "photo" ? event.target.files[0] : event.target.value;
-    formData.set(name, value);
     setValues({ ...values, [name]: value });
   };
 

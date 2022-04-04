@@ -47,7 +47,7 @@ render(
       <Route path="admin/create/product"element={<AddProduct/>}/>
       <Route path="admin/products"element={<ManageProducts/>}/>
       <Route path="admin/orders"element={<ManageOrders/>}/>
-      <Route path="admin/product/update/:productID"element={<UpdateProduct/>}/>
+      <Route path="admin/product/update/:productId"element={<UpdateProduct/>}/>
       <Route path="admin/view/order/:orderId"element={<ViewOrder/>}/>
 
 
