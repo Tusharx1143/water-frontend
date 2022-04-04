@@ -13,8 +13,6 @@ export const AddProduct = () => {
                 description: "",
                 price: "",
                 stock: "",
-                categories:[],
-                category:"",
                 loading:false,
                 error:"",
                 createdProduct:"",
@@ -26,7 +24,6 @@ export const AddProduct = () => {
                 description, 
                 price,
                 stock,
-                categories,
                 loading,
                 error,
                 createdProduct,
@@ -58,7 +55,7 @@ const onSubmit = (event) => {
       };
     
 const handleChange = name => event => {
-  const value=name==="photo"?event.target.files[0]:event.target.value;
+  const value=event.target.value;
   setValues({...values,[name]:value});
         //
 };
