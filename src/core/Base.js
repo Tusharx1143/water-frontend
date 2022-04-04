@@ -27,7 +27,7 @@ const Base=({
                                 </div>
                                 <div className="container-fluid bg-light ">     
                                 <span >
-                                Best water shop in virar
+Think before you let it drip
                                 </span>
                                 </div>
                         </footer>
