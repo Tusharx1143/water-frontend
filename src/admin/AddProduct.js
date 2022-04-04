@@ -27,32 +27,16 @@ export const AddProduct = () => {
                 price,
                 stock,
                 categories,
-                category,
                 loading,
                 error,
                 createdProduct,
                 getaRedirect,
                 formData
                } = values;
-            const preload =()=>{
-                getAllCategories().then(data=>{
-                  console.log(data);
-                        if(data.error){
-                                setValues({...values,error:data.error});
-                        }else{
-                                setValues({...values,categories:data,formData:new FormData()});
-                                console.log("CATE:",categories);
-                        }
-                })
-            }
-
-            useEffect(()=>{
-                preload();
-            },[])
 const onSubmit = (event) => {
                 event.preventDefault();
                 setValues({...values,error:"",loading:true});
-                createProduct(user._id,token,formData)
+                createProduct(user._id,token,JSON.stringify(values))
                 .then(data=>{
                   if(data.error){
                     setValues({...values,error:data.error});
@@ -75,7 +59,6 @@ const onSubmit = (event) => {
     
 const handleChange = name => event => {
   const value=name==="photo"?event.target.files[0]:event.target.value;
-  formData.set(name,value);
   setValues({...values,[name]:value});
         //
 };
